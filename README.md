@@ -84,7 +84,7 @@ This project demonstrates how a real café business can digitize its operations 
 ## 🌐 Live Demo
 👉 https://future-fs-03-iota-five.vercel.app/
 
-(Replace this with your actual deployed link)
+
 
 ---
 
