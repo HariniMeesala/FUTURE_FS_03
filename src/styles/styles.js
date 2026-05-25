@@ -4,7 +4,9 @@ export const styles = {
   display: "flex",
   justifyContent: "space-between",
   padding: "15px 40px",
-  background: "#111",
+  backdropFilter: "blur(10px)",
+background: "rgba(17,17,17,0.85)",
+borderBottom: "1px solid rgba(255,255,255,0.08)",
   color: "white",
   alignItems: "center",
   position: "sticky",
@@ -63,9 +65,13 @@ a: {
   },
 
   section: {
-  padding: "60px",
+  padding: "70px 60px",
   textAlign: "center",
   scrollMarginTop: "90px",
+  marginTop: "25px",
+  borderRadius: "30px",
+  background: "#ffffff",
+boxShadow: "0 8px 25px rgba(0,0,0,0.06)",
 },
 
   row: {
@@ -81,8 +87,11 @@ a: {
   borderRadius: "20px",
   width: "230px",
   boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
-  transition: "0.3s",
   cursor: "pointer",
+  transition: "0.3s ease",
+borderRadius: "20px",
+overflow: "hidden",
+
 },
 
   menuImg: {
@@ -213,9 +222,21 @@ a: {
   contactBox: {
   maxWidth: "500px",
   margin: "40px auto 0",
-  background: "rgba(255,255,255,0.1)",
-  padding: "25px",
-  borderRadius: "18px",
+
+  background:
+    "rgba(255,255,255,0.08)",
+
+  backdropFilter: "blur(12px)",
+
+  border:
+    "1px solid rgba(255,255,255,0.15)",
+
+  padding: "30px",
+
+  borderRadius: "22px",
+
+  boxShadow:
+    "0 10px 30px rgba(0,0,0,0.25)",
 },
 
 textarea: {

@@ -5,6 +5,7 @@ export default function Navbar({
   setLoginOpen,
   setSignupOpen,
   logout,
+  cart,
 }) {
   return (
     <nav style={styles.nav}>
@@ -48,7 +49,39 @@ export default function Navbar({
             <span style={{ marginLeft: "15px" }}>
               👋 {currentUser.username}
             </span>
+           <a
+  href="#cart"
+  style={{
+    textDecoration: "none",
+    marginLeft: "20px",
+    position: "relative",
+    fontSize: "26px",
+  }}
+>
+  🛒
 
+  {cart.length > 0 && (
+    <span
+      style={{
+        position: "absolute",
+        top: "-10px",
+        right: "-12px",
+        background: "crimson",
+        color: "white",
+        borderRadius: "50%",
+        width: "22px",
+        height: "22px",
+        fontSize: "12px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontWeight: "bold",
+      }}
+    >
+      {cart.length}
+    </span>
+  )}
+</a>
             <button
               style={styles.smallBtn}
               onClick={logout}
