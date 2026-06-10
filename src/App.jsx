@@ -57,6 +57,7 @@ export default function App() {
 
   // ---------------- CART ----------------
   const [cart, setCart] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [search, setSearch] = useState("");
 
   // ---------------- ORDERS ----------------
@@ -79,55 +80,74 @@ export default function App() {
     {
       name: "Cappuccino",
       price: 120,
-      image:
-        "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=300&q=80",
+      image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=300&q=80",
     },
-
     {
       name: "Cold Coffee",
       price: 100,
-      image:
-        "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=60",
+      image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=60",
     },
-
     {
       name: "Latte",
       price: 150,
-      image:
-        "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=300&q=80",
+      image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=300&q=80",
     },
-
     {
       name: "Mocha",
       price: 180,
-      image:
-        "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=300&q=80",
+      image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=300&q=80",
     },
 
+    // ⭐ EXTRA NEW ITEMS
     {
-      name: "Chocolate Brownie",
-      price: 180,
-      image:
-        "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=300&q=80",
+      name: "Espresso Shot",
+      price: 90,
+      image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=300&q=80",
     },
-
     {
-      name: "Cheese Cake",
+      name: "Iced Americano",
+      price: 130,
+      image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=300&q=80",
+    },
+    {
+      name: "Caramel Macchiato",
+      price: 170,
+      image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=300&q=80",
+    },
+    {
+      name: "Cheesecake Slice",
       price: 220,
-      image:
-        "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=300&q=80",
+      image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=300&q=80",
     },
-
     {
-      name: "Ice Cream Sundae",
-      price: 160,
-      image:
-        "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=300&q=80",
+      name: "Brownie Sundae",
+      price: 200,
+      image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=300&q=80",
+    },
+    {
+      name: "Hazelnut Frappe",
+      price: 190,
+      image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=300&q=80",
     },
   ];
   const filteredItems = menuItems.filter((item) =>
-  item.name.toLowerCase().includes(search.toLowerCase())
-);
+    item.name.toLowerCase().includes(search.toLowerCase())
+  );
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const toggleFavorite = (item) => {
+    setFavorites((prev) => {
+      const exists = prev.find((f) => f.name === item.name);
+
+      if (exists) {
+        return prev.filter((f) => f.name !== item.name);
+      } else {
+        return [...prev, item];
+      }
+    });
+  };
 
   // ---------------- SAVE USERS ----------------
   useEffect(() => {
@@ -210,6 +230,8 @@ export default function App() {
 
     setSignupOpen(false);
     setLoginOpen(true);
+
+
   };
 
   // ---------------- LOGOUT ----------------
@@ -218,8 +240,8 @@ export default function App() {
     localStorage.removeItem("current-user");
     setCart([]);
     document
-  .getElementById("orders")
-  ?.scrollIntoView({ behavior: "smooth" });
+      .getElementById("orders")
+      ?.scrollIntoView({ behavior: "smooth" });
   };
 
   // ---------------- INPUT CHANGE ----------------
@@ -348,8 +370,8 @@ export default function App() {
 
     setOpen(false);
     document
-  .getElementById("bookings")
-  ?.scrollIntoView({ behavior: "smooth" });
+      .getElementById("table-bookings")
+      ?.scrollIntoView({ behavior: "smooth" });
   };
   // ---------------- CONTACT FORM SUBMIT ----------------
   const handleContactSubmit = (e) => {
@@ -484,101 +506,155 @@ export default function App() {
         fontFamily: "Poppins, sans-serif",
         scrollBehavior: "smooth",
         background: "#f7f4f1",
-padding: "20px",
+        padding: 0,
       }}
     >
 
-    <Navbar
-  currentUser={currentUser}
-  setLoginOpen={setLoginOpen}
-  setSignupOpen={setSignupOpen}
-  logout={logout}
-  cart={cart}
-/>
+      <Navbar
+        currentUser={currentUser}
+        setLoginOpen={setLoginOpen}
+        setSignupOpen={setSignupOpen}
+        logout={logout}
+        cart={cart}
+      />
       {/* HERO */}
       <motion.section
-  className="hero"
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
->
-  <div className="hero-overlay">
+        className="hero"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      >
+        <div className="hero-overlay">
 
-    <motion.div
-      className="hero-content"
-      initial={{ y: 50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8 }}
-    >
+          <motion.div
+            className="hero-content"
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
 
-      <p className="hero-tag">
-        Premium Cafe Experience ☕
-      </p>
+            <p className="hero-tag">
+              Premium Cafe Experience ☕
+            </p>
 
-      <h1>
-        Fresh Coffee <br />
-        Cozy Moments
-      </h1>
+            <h1>
+              Fresh Coffee <br />
+              Cozy Moments
+            </h1>
 
-      <p className="hero-desc">
-        Discover handcrafted coffee, delicious desserts,
-        and the perfect ambience to relax, work,
-        and create memories.
-      </p>
+            <p className="hero-desc">
+              Discover handcrafted coffee, delicious desserts,
+              and the perfect ambience to relax, work,
+              and create memories.
+            </p>
 
-      <div className="hero-buttons">
+            <div className="hero-buttons">
 
-        <a href="#menu">
-          <button className="hero-btn">
-            Explore Menu
-          </button>
-        </a>
+              <a href="#menu">
+                <button className="hero-btn">
+                  Explore Menu
+                </button>
+              </a>
 
-        <a href="#contact">
-          <button className="hero-btn-outline">
-            Book Table
-          </button>
-        </a>
+              <a href="#contact">
+                <button
+                  className="hero-btn-outline"
+                  onClick={() => setOpen(true)}
+                >
+                  Book Table
+                </button>
+              </a>
 
-      </div>
+            </div>
 
-    </motion.div>
-  </div>
-</motion.section>
+          </motion.div>
+        </div>
+      </motion.section>
       {/* ABOUT */}
       <motion.section
-  id="about"
-  style={{
-    ...styles.section,
-    background: "#fffaf5",
-    marginBottom: "50px",
-  }}>
-       <h2 className="section-title">
-  About Bean Bliss ☕
-</h2>
-        <div style={styles.aboutBox}>
+        id="about"
+        style={{
+          ...styles.section,
+          background: "linear-gradient(135deg,#fff7f0,#f3e6dc)",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <h2
+          className="section-title center"
+          style={{
+            marginBottom: "10px",
+            fontSize: "44px",
+            color: "#3e2723",
+          }}
+        >
+          About Bean Bliss ☕
+        </h2>
+
+        <p
+          style={{
+            color: "#6f4e37",
+            marginBottom: "40px",
+            fontSize: "18px",
+            letterSpacing: "0.5px",
+          }}
+        >
+          Where coffee meets comfort & conversations begin
+        </p>
+
+        <div
+          style={{
+            ...styles.aboutBox,
+            background: "rgba(255,255,255,0.7)",
+            backdropFilter: "blur(12px)",
+            border: "1px solid rgba(212,163,115,0.25)",
+          }}
+        >
 
           <img
-            src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=300&q=80"
-            style={styles.aboutImg}
+            src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=500&q=80"
+            style={{
+              ...styles.aboutImg,
+              transform: "rotate(-1deg)",
+            }}
           />
 
           <div style={styles.aboutText}>
+            <h3 style={{ color: "#d4a373", marginBottom: "10px" }}>
+              Our Story
+            </h3>
+
             <p>
-              Welcome to Bean Bliss Cafe — a cozy place
-              where coffee meets comfort ❤️
+              Welcome to Bean Bliss Cafe — a cozy place where coffee meets comfort ❤️
             </p>
 
             <p>
-              We serve freshly brewed coffee, delicious
-              desserts, and a peaceful ambience for
-              friends, families, and coffee lovers.
+              We serve freshly brewed coffee, handcrafted desserts, and a warm ambience
+              designed for relaxation, work, and meaningful moments.
             </p>
 
             <p>
-              Our mission is to make every visit special
-              with premium quality drinks and warm
-              hospitality ☕✨
+              Every cup is prepared with passion, quality beans, and love ☕✨
             </p>
+
+            <button
+              style={{
+                marginTop: "20px",
+                padding: "12px 22px",
+                border: "none",
+                borderRadius: "30px",
+                background: "linear-gradient(135deg,#6f4e37,#3e2723)",
+                color: "#fff",
+                cursor: "pointer",
+                fontWeight: "600",
+                boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+                transition: "0.3s",
+              }}
+              onClick={() =>
+                document.getElementById("menu")?.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              Explore Menu →
+            </button>
           </div>
 
         </div>
@@ -586,73 +662,93 @@ padding: "20px",
 
       {/* MENU */}
       <motion.section
-  id="menu"
-  style={{
-    ...styles.section,
-    background: "#fdf6f0",
-  }}>
-       <center><h2>Menu ☕🍰</h2></center>
+        id="menu"
+        style={{
+          ...styles.section,
+          background: "linear-gradient(135deg,#fff7f0,#f4e7dc)",
+        }}
+      >
+        <h2 className="section-title center">Our Menu ☕🍰</h2>
 
-<div
-  style={{
-    display: "flex",
-    justifyContent: "center",
-    marginBottom: "30px",
-    marginTop: "20px",
-  }}
->
-  <input
-    type="text"
-    placeholder="Search coffee..."
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-    style={{
-      padding: "12px 20px",
-      width: "300px",
-      maxWidth: "90%",
-      borderRadius: "30px",
-      border: "2px solid #6f4e37",
-      outline: "none",
-      fontSize: "16px",
-    }}
-  />
-</div>
+        <p
+          style={{
+            color: "#6f4e37",
+            marginBottom: "25px",
+            fontSize: "17px",
+          }}
+        >
+          Freshly brewed coffee & handcrafted desserts made with love
+        </p>
 
-        <div style={styles.row}>
-         {filteredItems.map((item, i) => (
-            <div
-  key={i}
-  style={styles.menuCard}
-  onMouseEnter={(e) => {
-    e.currentTarget.style.transform = "scale(1.05)";
+        {/* SEARCH */}
+        <div className="menu-search">
+          <input
+            type="text"
+            placeholder="Search coffee, dessert..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="menu-input"
+          />
+        </div>
 
-    e.currentTarget.style.boxShadow =
-      "0 15px 35px rgba(0,0,0,0.18)";
-  }}
-
-  onMouseLeave={(e) => {
-    e.currentTarget.style.transform = "scale(1)";
-
-    e.currentTarget.style.boxShadow =
-      "0 10px 25px rgba(0,0,0,0.1)";
-  }}
->
-              <img
-                style={styles.menuImg}
-                src={item.image}
-              />
-
-              <h3>{item.name}</h3>
-
-              <p>₹{item.price}</p>
-
-              <button
-                style={styles.smallBtn}
-                onClick={() => addToCart(item)}
+        {/* MENU GRID */}
+        <div className="menu-grid">
+          {filteredItems.map((item, i) => (
+            <motion.div
+              key={i}
+              className="menu-card"
+              whileHover={{ scale: 1.05 }}
+            >
+              <div
+                className="menu-img-wrapper"
+                style={{ position: "relative" }}
               >
-                Add To Cart
-              </button>
-            </div>
+                <img src={item.image} className="menu-img" />
+
+                {/* ❤️ Favorite Icon */}
+                <span
+                  onClick={() => toggleFavorite(item)}
+                  style={{
+                    position: "absolute",
+                    top: "10px",
+                    right: "10px",
+                    cursor: "pointer",
+
+                    fontSize: "20px",
+                    lineHeight: "1",
+
+                    color: favorites.find(f => f.name === item.name)
+                      ? "#e63946"
+                      : "rgba(255,255,255,0.9)",
+
+                    textShadow: "0 2px 6px rgba(0,0,0,0.5)",
+
+                    userSelect: "none",
+                  }}
+                >
+                  {favorites.find(f => f.name === item.name) ? "❤️" : "🤍"}
+                </span>
+              </div>
+
+              <div className="menu-content">
+                <h3>{item.name}</h3>
+
+                <p className="menu-desc">
+                  Freshly prepared premium quality
+                </p>
+
+                <div className="menu-bottom">
+                  <span className="price">₹{item.price}</span>
+
+                  <button
+                    className="menu-btn"
+                    onClick={() => addToCart(item)}
+                  >
+                    Add to Cart 🛒
+                  </button>
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
       </motion.section>
@@ -661,148 +757,185 @@ padding: "20px",
         id="gallery"
         style={{
           ...styles.section,
-          background: "#fff8f0",
+          background: "linear-gradient(135deg,#fff8f2,#f3e6dc)",
         }}
       >
-        <h2>Cafe Gallery 📸</h2>
+        <h2 className="section-title center">Cafe Gallery 📸</h2>
 
-        <div style={styles.row}>
+        <p
+          style={{
+            color: "#6f4e37",
+            marginBottom: "30px",
+            fontSize: "17px",
+          }}
+        >
+          A glimpse into our cozy ambience & handcrafted moments
+        </p>
 
+        <div className="gallery-grid">
           <img
-            style={styles.galleryImg}
-            src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=300&q=80"
+            src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80"
+            className="gallery-item"
           />
 
           <img
-            style={styles.galleryImg}
-            src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=300&q=80"
+            src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80"
+            className="gallery-item"
           />
 
           <img
-            style={styles.galleryImg}
-            src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=300&q=80"
+            src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=600&q=80"
+            className="gallery-item"
           />
 
           <img
-            style={styles.galleryImg}
-            src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=300&q=80"
+            src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80"
+            className="gallery-item"
           />
 
+          <img
+            src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80"
+            className="gallery-item"
+          />
+
+          <img
+            src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=600&q=80"
+            className="gallery-item"
+          />
+
+          <img
+            src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=600&q=80"
+            className="gallery-item"
+          />
+
+          <img
+            src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80"
+            className="gallery-item"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=600&q=80"
+            className="gallery-item"
+          />
         </div>
       </section>
-
       {/* CART */}
       {/* CART */}
-<section
-  id="cart"
-  style={{
-    ...styles.section,
-    background: "linear-gradient(135deg, #f8f5f2, #efe7df)",
-  }}
->
-  <h2>Your Cart 🛒</h2>
+      <section
+        id="cart"
+        style={{
+          ...styles.section,
+          background: "linear-gradient(135deg, #f8f5f2, #efe7df)",
+        }}
+      >
+        <h2 className="section-title-main">Your Cart 🛒</h2>
+        <p style={{ color: "#6f4e37", marginBottom: "25px" }}>
+          Everything you selected, ready to enjoy ☕
+        </p>
 
-  {cart.length === 0 ? (
-    <div style={{ textAlign: "center", padding: "40px 10px" }}>
-  <div style={{ fontSize: "50px" }}>🛒</div>
-  <h3 style={{ marginTop: "10px" }}>Your cart is empty</h3>
-  <p style={{ color: "#777" }}>
-    Add some delicious items from menu ☕
-  </p>
-</div>
-  ) : (
-    <>
-      {cart.map((item, i) => (
-
-        <div className="cart-card" key={i}>
-
-         <img
-  src={item.image}
-  className="cart-img"
-  alt={item.name}
-/>
-
-          <div className="cart-details">
-
-            <h3>{item.name}</h3>
-
-            <p>
-              ₹{item.price} × {item.qty}
+        {cart.length === 0 ? (
+          <div style={{ textAlign: "center", padding: "40px 10px" }}>
+            <div style={{ fontSize: "50px" }}>🛒</div>
+            <h3 style={{ marginTop: "10px" }}>Your cart is empty</h3>
+            <p style={{ color: "#777" }}>
+              Add some delicious items from menu ☕
             </p>
-
-            <h4>
-              ₹{item.price * item.qty}
-            </h4>
-
           </div>
+        ) : (
+          <>
+            {cart.map((item, i) => (
 
-          <div className="qty-controls">
+              <div className="cart-card" key={i}>
 
-            <button
-              className="qty-btn"
-              onClick={() => decreaseQty(item.name)}
-            >
-              -
-            </button>
+                <img
+                  src={item.image}
+                  className="cart-img"
+                  alt={item.name}
+                />
 
-            <span>{item.qty}</span>
+                <div className="cart-details">
 
-            <button
-              className="qty-btn"
-              onClick={() => increaseQty(item.name)}
-            >
-              +
-            </button>
+                  <h3>{item.name}</h3>
 
-            <button
-              className="delete-btn"
-              onClick={() => removeItem(item.name)}
-            >
-              ✕
-            </button>
+                  <p>
+                    ₹{item.price} × {item.qty}
+                  </p>
 
-          </div>
+                  <h4>
+                    ₹{item.price * item.qty}
+                  </h4>
 
-        </div>
+                </div>
 
-      ))}
+                <div className="qty-controls">
 
-      <div style={styles.totalBox}>
-        <h2>Total Price: ₹{totalPrice}</h2>
+                  <button
+                    className="qty-btn"
+                    onClick={() => decreaseQty(item.name)}
+                  >
+                    -
+                  </button>
 
-        <button
-          onClick={checkout}
-          style={styles.btn}
-        >
-          Checkout
-        </button>
-        <button
-  onClick={() => setCart([])}
-  style={{
-    marginLeft: "10px",
-    background: "#d32f2f",
-    color: "white",
-    border: "none",
-    padding: "10px 15px",
-    borderRadius: "10px",
-    cursor: "pointer",
-  }}
->
-  Clear Cart
-</button>
-      </div>
-    </>
-  )}
-</section>
+                  <span>{item.qty}</span>
+
+                  <button
+                    className="qty-btn"
+                    onClick={() => increaseQty(item.name)}
+                  >
+                    +
+                  </button>
+
+                  <button
+                    className="delete-btn"
+                    onClick={() => removeItem(item.name)}
+                  >
+                    ✕
+                  </button>
+
+                </div>
+
+              </div>
+
+            ))}
+
+            <div style={styles.totalBox}>
+              <h2>Total Price: ₹{totalPrice}</h2>
+
+              <button
+                onClick={checkout}
+                style={styles.btn}
+              >
+                Checkout
+              </button>
+              <button
+                onClick={() => setCart([])}
+                style={{
+                  marginLeft: "10px",
+                  background: "#d32f2f",
+                  color: "white",
+                  border: "none",
+                  padding: "10px 15px",
+                  borderRadius: "10px",
+                  cursor: "pointer",
+                }}
+              >
+                Clear Cart
+              </button>
+            </div>
+          </>
+        )}
+      </section>
       {/* ORDERS */}
-<section
-  id="bookings"
-  style={{
-    ...styles.section,
-    background: "linear-gradient(135deg, #f3ede7, #e8ddd3)",
-  }}
->
-        <h2>Your Orders 📦</h2>
+      <section
+        id="bookings"
+        style={{
+          ...styles.section,
+          background: "linear-gradient(135deg, #f3ede7, #e8ddd3)",
+        }}
+      >
+        <h2 className="section-title-main">Your Orders 📦</h2>
+        <p style={{ color: "#6f4e37", marginBottom: "25px" }}>
+          Track all your delicious past orders 🍰
+        </p>
 
         {!currentUser ? (
           <p>Please login to view orders.</p>
@@ -854,10 +987,13 @@ padding: "20px",
 
       {/* BOOKINGS */}
       <section
-  id="bookings"
-  style={styles.section}
->
-        <h2>Your Table Bookings 🍽️</h2>
+        id="table-bookings"
+        style={styles.section}
+      >
+        <h2 className="section-title-main">Your Table Bookings 🍽️</h2>
+        <p style={{ color: "#6f4e37", marginBottom: "25px" }}>
+          Your reserved cozy spots at Bean Bliss ☕
+        </p>
 
         {!currentUser ? (
           <p>Please login first.</p>
@@ -901,64 +1037,142 @@ padding: "20px",
       </section>
 
       {/* CONTACT */}
-     <section
-  id="contact"
-  style={{
-    ...styles.section,
-        background: "linear-gradient(135deg, #e6d3c5, #d7b8a3)",
-    color: "#3e2723",
-  }}
->
-        <h2>Visit Us 📍</h2>
+      {/* CONTACT */}
+      <section
+        id="contact"
+        style={{
+          ...styles.section,
+          background: "linear-gradient(135deg, #f3e7dd, #e7d2c1)",
+          color: "#3e2723",
+        }}
+      >
+        <h2 style={{ fontSize: "42px", marginBottom: "10px" }}>
+          Contact & Visit ☕
+        </h2>
 
-        <p>Email: beanbliss@gmail.com</p>
-        <p>Phone: +91 9876543210</p>
+        <p style={{ marginBottom: "40px", color: "#6f4e37" }}>
+          We’re here to help, serve, and welcome you anytime
+        </p>
 
-        <button
-          style={styles.btn}
-          onClick={() => setOpen(true)}
+        {/* MAIN LAYOUT */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gap: "30px",
+            alignItems: "stretch",
+          }}
         >
-          Book Table
-        </button>
 
-        {/* CONTACT FORM */}
-        <div style={styles.contactBox}>
-          <h2>Contact Us ✉️</h2>
+          {/* LEFT - INFO PANEL */}
+          <div
+            style={{
+              background: "rgba(255,255,255,0.7)",
+              padding: "30px",
+              borderRadius: "20px",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+              backdropFilter: "blur(10px)",
+            }}
+          >
+            <h3>📍 Bean Bliss Cafe</h3>
 
-          <form onSubmit={handleContactSubmit}>
-            <input
-              style={styles.input}
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={contactForm.name}
-              onChange={handleContactChange}
+            <p style={{ marginTop: "10px", lineHeight: "1.7" }}>
+              12 Coffee Street,<br />
+              Near Central Park,<br />
+              Hyderabad, India
+            </p>
+
+            <hr style={{ margin: "20px 0", opacity: 0.2 }} />
+
+            <p>📞 +91 9876543210</p>
+            <p>📧 beanbliss@gmail.com</p>
+
+            <hr style={{ margin: "20px 0", opacity: 0.2 }} />
+
+            <p><b>Opening Hours</b></p>
+            <p>Mon - Fri: 8AM - 11PM</p>
+            <p>Sat - Sun: 9AM - 12AM</p>
+
+            <div style={{ marginTop: "20px", fontSize: "22px" }}>
+              ☕ ❤️ 🍰
+            </div>
+          </div>
+
+          {/* MIDDLE - MAP */}
+          <div
+            style={{
+              borderRadius: "20px",
+              overflow: "hidden",
+              boxShadow: "0 15px 40px rgba(0,0,0,0.15)",
+              minHeight: "350px",
+            }}
+          >
+            <iframe
+              title="Bean Bliss Location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.0661!2d78.4744!3d17.3850!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99f6f1f6f6f1%3A0x0!2sHyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1710000000000"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              loading="lazy"
+              allowFullScreen
             />
+          </div>
 
-            <input
-              style={styles.input}
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              value={contactForm.email}
-              onChange={handleContactChange}
-            />
+          {/* RIGHT - FORM */}
+          <div
+            style={{
+              background: "#fff",
+              padding: "30px",
+              borderRadius: "20px",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+            }}
+          >
+            <h3>💬 Send Message</h3>
 
-            <textarea
-              style={styles.textarea}
-              name="message"
-              placeholder="Your Message"
-              value={contactForm.message}
-              onChange={handleContactChange}
-            />
+            <form onSubmit={handleContactSubmit}>
+              <input
+                style={styles.input}
+                name="name"
+                placeholder="Your Name"
+                value={contactForm.name}
+                onChange={handleContactChange}
+              />
 
-            <button
-              type="submit"
-              style={styles.btn}
-            >
-              Send Message
-            </button>
-          </form>
+              <input
+                style={styles.input}
+                name="email"
+                placeholder="Your Email"
+                value={contactForm.email}
+                onChange={handleContactChange}
+              />
+
+              <textarea
+                style={{
+                  ...styles.textarea,
+                  minHeight: "120px",
+                }}
+                name="message"
+                placeholder="Write your message..."
+                value={contactForm.message}
+                onChange={handleContactChange}
+              />
+
+              <button
+                type="submit"
+                style={{
+                  ...styles.btn,
+                  width: "100%",
+                  marginTop: "10px",
+                }}
+              >
+                Send Message 🚀
+              </button>
+            </form>
+
+            <p style={{ marginTop: "15px", fontSize: "12px", color: "#777" }}>
+              We usually respond within 24 hours
+            </p>
+          </div>
         </div>
       </section>
       {/* BOOK TABLE */}
@@ -1128,55 +1342,69 @@ padding: "20px",
       )}
 
       {/* TOAST */}
-     {toast && (
-  <div
-    style={{
-      position: "fixed",
-      top: "30px",
-      right: "30px",
-      background: "linear-gradient(135deg,#6f4e37,#3e2723)",
-      color: "white",
-      padding: "16px 24px",
-      borderRadius: "14px",
-      boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
-      zIndex: 9999,
-      fontWeight: "600",
-      animation: "slideIn 0.4s ease",
-    }}
-  >
-    ✅ {toast}
-  </div>
-)}
+      {toast && (
+        <div
+          style={{
+            position: "fixed",
+            top: "30px",
+            right: "30px",
+            background: "linear-gradient(135deg,#6f4e37,#3e2723)",
+            color: "white",
+            padding: "16px 24px",
+            borderRadius: "14px",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
+            zIndex: 9999,
+            fontWeight: "600",
+            animation: "slideIn 0.4s ease",
+          }}
+        >
+          ✅ {toast}
+        </div>
+      )}
 
-<button
-  onClick={() =>
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    })
-  }
-  style={{
-    position: "fixed",
-    bottom: "30px",
-    right: "30px",
-    width: "50px",
-    height: "50px",
-    borderRadius: "50%",
-    border: "none",
-    background: "linear-gradient(135deg,#5c7cfa,#364fc7)",
-    color: "white",
-    fontSize: "22px",
-    cursor: "pointer",
-    boxShadow: "0 8px 20px rgba(0,0,0,0.25)",
-    zIndex: 999,
-  }}
->
-  ↑
-</button>
+      <button
+        onClick={() =>
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          })
+        }
+        style={{
+          position: "fixed",
+          bottom: "30px",
+          right: "30px",
+          width: "50px",
+          height: "50px",
+          borderRadius: "50%",
+          background: "#d4a373",
+          color: "#2b1a12",
+          border: "none",
+          fontSize: "22px",
+          cursor: "pointer",
+          boxShadow: "0 8px 20px rgba(0,0,0,0.25)",
+          zIndex: 999,
+        }}
+      >
+        ↑
+      </button>
 
       {/* FOOTER */}
       <footer style={styles.footer}>
-        © 2026 Bean Bliss Cafe ☕ | Made with ❤️
+        <h2 style={{ marginBottom: "10px", color: "#d4a373" }}>
+          Bean Bliss ☕
+        </h2>
+
+        <p style={{ opacity: 0.9 }}>
+          Fresh Coffee • Cozy Vibes • Premium Experience
+        </p>
+
+        <div style={{ margin: "15px 0", fontSize: "18px" }}>
+          ☕ ❤️ 🍰
+        </div>
+
+        <p style={{ fontSize: "13px", opacity: 0.7 }}>
+          © 2026 Bean Bliss Cafe | Crafted with love
+        </p>
       </footer>
     </div>
   );

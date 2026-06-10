@@ -1,78 +1,151 @@
 export const styles = {
 
-   nav: {
+ nav: {
+  position: "fixed",
+  top: 0,
+  left: 0,
+
+  width: "100%",
+  height: "80px",
+
   display: "flex",
   justifyContent: "space-between",
-  padding: "15px 40px",
-  backdropFilter: "blur(10px)",
-background: "rgba(17,17,17,0.85)",
-borderBottom: "1px solid rgba(255,255,255,0.08)",
-  color: "white",
   alignItems: "center",
-  position: "sticky",
-  top: 0,
-  zIndex: 1000,
+
+  padding: "0 24px",  
+
+  zIndex: 9999,
+
+  background: "rgba(44,24,16,0.95)",
+  backdropFilter: "blur(20px)",
+
+  boxSizing: "border-box", 
+
+  borderBottom: "1px solid rgba(255,255,255,0.08)",
 },
   logo: {
-    fontSize: "28px",
+    fontSize: "32px",
+    fontWeight: "800",
+
+    background:
+      "linear-gradient(135deg,#f8e6c1,#d4a373)",
+
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+
+    letterSpacing: "1px",
+
+    cursor: "pointer",
+
+    textShadow: "0 4px 15px rgba(0,0,0,0.2)",
   },
-a: {
-  color: "white",
-  marginLeft: "20px",
-  textDecoration: "none",
-  fontWeight: "500",
-  transition: "0.3s",
-},
+
+  a: {
+    color: "#f5e6d3",
+
+    textDecoration: "none",
+
+    marginLeft: "28px",
+
+    fontSize: "17px",
+
+    fontWeight: "500",
+
+    position: "relative",
+
+    transition: "all .3s ease",
+  },
+
+
   hero: {
+    minHeight: "95vh",
+
     display: "flex",
-    justifyContent: "space-between",
-    padding: "60px",
+    justifyContent: "center",
     alignItems: "center",
-    gap: "30px",
-    flexWrap: "wrap",
-  },
 
+    background:
+      "linear-gradient(135deg,#fdf8f3,#efe3d4)",
+
+    padding: "100px 60px",
+  },
   h1: {
-    fontSize: "45px",
+    fontSize: "58px",
+    color: "#222",
+    lineHeight: "1.2",
+    marginBottom: "20px",
   },
 
-   btn: {
-  padding: "12px 22px",
-  background: "linear-gradient(135deg,#ffb74d,#ff9800)",
-  border: "none",
-  borderRadius: "10px",
-  cursor: "pointer",
-  marginTop: "10px",
-  color: "white",
-  fontWeight: "bold",
-  transition: "0.3s",
-},
+  btn: {
+    padding: "14px 30px",
+
+    background:
+      "linear-gradient(135deg,#6f4e37,#4e342e)",
+
+    color: "#fff",
+
+    border: "none",
+    borderRadius: "50px",
+
+    cursor: "pointer",
+
+    fontWeight: "700",
+
+    boxShadow:
+      "0 10px 25px rgba(111,78,55,.3)",
+
+    transition: "all .3s ease",
+  },
 
   smallBtn: {
-    marginLeft: "10px",
-    padding: "10px 16px",
-    border: "none",
-    background: "linear-gradient(135deg,#ffb74d,#ff9800)",
-    color: "white",
-    borderRadius: "10px",
-    cursor: "pointer",
-    fontWeight: "bold",
-  },
+    marginLeft: "12px",
 
+    padding: "11px 22px",
+
+    border: "none",
+
+    borderRadius: "50px",
+
+    background:
+      "linear-gradient(135deg,#6f4e37,#4e342e)",
+
+    color: "#fff",
+
+    cursor: "pointer",
+
+    fontWeight: "700",
+
+    boxShadow:
+      "0 8px 20px rgba(111,78,55,.35)",
+
+    transition: ".3s",
+  },
   heroImg: {
     width: "45%",
-    borderRadius: "15px",
+    borderRadius: "30px",
+
+    boxShadow:
+      "0 20px 40px rgba(0,0,0,0.15)",
   },
 
   section: {
-  padding: "70px 60px",
-  textAlign: "center",
-  scrollMarginTop: "90px",
-  marginTop: "25px",
-  borderRadius: "30px",
-  background: "#ffffff",
-boxShadow: "0 8px 25px rgba(0,0,0,0.06)",
-},
+    padding: "90px 60px",
+
+    margin: "40px auto",
+
+    maxWidth: "1400px",
+
+    background: "#fff",
+
+    borderRadius: "30px",
+
+    boxShadow:
+      "0 15px 40px rgba(0,0,0,0.06)",
+
+    textAlign: "center",
+
+    scrollMarginTop: "100px",
+  },
 
   row: {
     display: "flex",
@@ -82,32 +155,38 @@ boxShadow: "0 8px 25px rgba(0,0,0,0.06)",
   },
 
   menuCard: {
-  background: "white",
-  padding: "15px",
-  borderRadius: "20px",
-  width: "230px",
-  boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
-  cursor: "pointer",
-  transition: "0.3s ease",
-borderRadius: "20px",
-overflow: "hidden",
+    width: "280px",
 
-},
+    background: "white",
+
+    borderRadius: "24px",
+
+    overflow: "hidden",
+
+    boxShadow:
+      "0 15px 35px rgba(0,0,0,0.08)",
+
+    transition: "all .3s ease",
+
+    cursor: "pointer",
+  },
 
   menuImg: {
     width: "100%",
-    height: "160px",
+    height: "220px",
     objectFit: "cover",
-    borderRadius: "10px",
   },
   galleryImg: {
-  width: "260px",
-  height: "220px",
-  objectFit: "cover",
-  borderRadius: "18px",
-  boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
-},
+    width: "300px",
+    height: "240px",
 
+    objectFit: "cover",
+
+    borderRadius: "24px",
+
+    boxShadow:
+      "0 12px 25px rgba(0,0,0,0.15)",
+  },
   cartItem: {
     display: "flex",
     alignItems: "center",
@@ -176,26 +255,34 @@ overflow: "hidden",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    zIndex: 9999,
   },
 
-   modal: {
-  background: "#ffffff",
-  padding: "30px",
-  borderRadius: "20px",
-  width: "320px",
-  color: "#111",
-},
+  modal: {
+    background: "#fff",
+
+    padding: "35px",
+
+    width: "360px",
+
+    borderRadius: "24px",
+
+    boxShadow:
+      "0 20px 50px rgba(0,0,0,0.25)",
+  },
 
   input: {
-  width: "100%",
-  padding: "12px",
-  boxSizing: "border-box",
-  borderRadius: "10px",
-  border: "none",
-  outline: "none",
-  marginBottom: "12px",
-  fontSize: "15px",
-},
+    width: "100%",
+    padding: "14px",
+
+    borderRadius: "12px",
+
+    border: "1px solid #ddd",
+
+    marginBottom: "15px",
+
+    fontSize: "15px",
+  },
 
   toast: {
     position: "fixed",
@@ -220,89 +307,156 @@ overflow: "hidden",
     fontWeight: "bold",
   },
   contactBox: {
-  maxWidth: "500px",
-  margin: "40px auto 0",
+    maxWidth: "500px",
+    margin: "40px auto 0",
 
-  background:
-    "rgba(255,255,255,0.08)",
+    background:
+      "rgba(255,255,255,0.08)",
 
-  backdropFilter: "blur(12px)",
+    backdropFilter: "blur(12px)",
 
-  border:
-    "1px solid rgba(255,255,255,0.15)",
+    border:
+      "1px solid rgba(255,255,255,0.15)",
 
-  padding: "30px",
+    padding: "30px",
 
-  borderRadius: "22px",
+    borderRadius: "22px",
 
-  boxShadow:
-    "0 10px 30px rgba(0,0,0,0.25)",
-},
-
-textarea: {
-  width: "100%",
-  padding: "12px",
-  boxSizing: "border-box",
-  borderRadius: "10px",
-  border: "none",
-  outline: "none",
-  marginBottom: "12px",
-  fontSize: "15px",
-  minHeight: "120px",
-  resize: "none",
-},
-  footer: {
-    textAlign: "center",
-    padding: "15px",
-    background: "black",
-    color: "white",
+    boxShadow:
+      "0 10px 30px rgba(0,0,0,0.25)",
   },
-  
-         orderBox: {
-  border: "1px solid #eee",
-  margin: "15px auto",
-  padding: "20px",
-  maxWidth: "550px",
-  borderRadius: "18px",
-  textAlign: "left",
-  background: "white",
-  boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
-},
 
-orderItem: {
-  display: "flex",
-  alignItems: "center",
-  gap: "15px",
-  marginTop: "15px",
-  paddingBottom: "10px",
-  borderBottom: "1px solid #eee",
-},
+  textarea: {
+    width: "100%",
+    minHeight: "140px",
 
-orderImg: {
-  width: "60px",
-  height: "60px",
-  borderRadius: "10px",
-  objectFit: "cover",
-},
-aboutBox: {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: "40px",
-  flexWrap: "wrap",
-  marginTop: "30px",
-},
+    padding: "14px",
 
-aboutImg: {
-  width: "350px",
-  borderRadius: "20px",
-  boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
-},
+    borderRadius: "12px",
 
-aboutText: {
-  maxWidth: "500px",
-  textAlign: "left",
-  lineHeight: "1.8",
-  fontSize: "18px",
-},
+    border: "1px solid #ddd",
+
+    resize: "none",
+
+    fontSize: "15px",
+  },
+  footer: {
+    background: "rgba(44,24,16,0.88)",
+    color: "#f5e6d3",
+
+    padding: "40px 20px",
+    marginTop: "60px",
+    textAlign: "center",
+    fontSize: "15px",
+
+    backdropFilter: "blur(20px)",
+    WebkitBackdropFilter: "blur(20px)",
+    borderTop: "1px solid rgba(255,255,255,0.08)",
+  },
+  orderBox: {
+    border: "1px solid #eee",
+    margin: "15px auto",
+    padding: "20px",
+    maxWidth: "550px",
+    borderRadius: "18px",
+    textAlign: "left",
+    background: "white",
+    boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
+  },
+
+  orderItem: {
+    display: "flex",
+    alignItems: "center",
+    gap: "15px",
+    marginTop: "15px",
+    paddingBottom: "10px",
+    borderBottom: "1px solid #eee",
+  },
+
+  orderImg: {
+    width: "60px",
+    height: "60px",
+    borderRadius: "10px",
+    objectFit: "cover",
+  },
+  aboutBox: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "50px",
+    flexWrap: "wrap",
+
+    marginTop: "40px",
+    padding: "30px",
+
+    background: "rgba(255, 255, 255, 0.6)",
+    backdropFilter: "blur(10px)",
+
+    borderRadius: "25px",
+    border: "1px solid rgba(212, 163, 115, 0.3)",
+
+    boxShadow: "0 15px 40px rgba(0,0,0,0.08)",
+  },
+
+  aboutImg: {
+    width: "360px",
+    borderRadius: "20px",
+
+    boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+    transform: "scale(1)",
+    transition: "0.3s ease",
+  },
+
+  aboutText: {
+    maxWidth: "520px",
+    textAlign: "left",
+    lineHeight: "1.9",
+    fontSize: "18px",
+    color: "#3e2723",
+  },
+
+
+  authBtn: {
+    marginLeft: "12px",
+
+    padding: "11px 22px",
+
+    borderRadius: "50px",
+
+    border: "none",
+
+    background:
+      "#d4a373",
+
+    color: "#4e342e",
+
+    fontWeight: "700",
+
+    cursor: "pointer",
+
+    transition: "all .3s ease",
+
+    boxShadow:
+      "0 5px 15px rgba(0,0,0,0.08)",
+  },
+  contactCard: {
+    background: "rgba(255,255,255,0.6)",
+    padding: "20px",
+    borderRadius: "16px",
+    textAlign: "center",
+    boxShadow: "0 8px 20px rgba(0,0,0,0.1)",
+    backdropFilter: "blur(10px)",
+  },
+
+  mapBox: {
+    width: "100%",
+    maxWidth: "500px",
+    height: "320px",
+    borderRadius: "16px",
+    overflow: "hidden",
+    boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
+  },
+
 };
+
+
